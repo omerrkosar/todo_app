@@ -37,7 +37,7 @@ export default function Todo() {
       }).catch((err)=>alert(err))
     }
     else {
-      insertTodo(values).then(todo=>{
+      insertTodo({...values,uid:user.uid}).then(todo=>{
         setTodos(st=>[...st,todo]);
       })
     }
