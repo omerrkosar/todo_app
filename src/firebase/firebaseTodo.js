@@ -6,7 +6,7 @@ import {db} from './firebaseConfig'
 export const insertTodo = (todo) => {
     return new Promise((resolve, reject) => {
         addDoc(collection(db,"todo"),todo).then((docRef) => {
-            resolve(todo);
+            resolve({...todo,id:docRef.id});
         }).catch((err) => reject(err))
     })
 }

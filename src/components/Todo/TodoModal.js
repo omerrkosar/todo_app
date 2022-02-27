@@ -1,8 +1,19 @@
+import {useEffect} from 'react';
 import {Modal,Form,Button,Input,Checkbox} from 'antd';
 
 
-export default function AddTodoModal({isModalVisible,closeModal,handleFinishModal}){
+export default function TodoModal({isModalVisible,closeModal,handleFinishModal,todo}){
   const [form] = Form.useForm();
+
+  useEffect(()=>{
+    if(todo!=null)
+    {
+      form.setFieldsValue(todo);
+    }
+    else {
+      form.resetFields();
+    };
+  },[todo])
   const handleFinish = (values) => {
     form.resetFields();
     Object.keys(values).forEach(key =>{
@@ -26,8 +37,10 @@ export default function AddTodoModal({isModalVisible,closeModal,handleFinishModa
               <Input />
             </Form.Item>
             <Form.Item label="Note" name="note" rules={[{ required: true, message: 'Please input your note!' }]}>
-              <Input.TextArea />
+                    <Input.TextArea/>
             </Form.Item>
+              
+            
             <Form.Item label="Finished"  name="finished" valuePropName="checked">
               <Checkbox />
             </Form.Item>

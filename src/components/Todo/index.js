@@ -2,8 +2,7 @@ import {useEffect, useState} from 'react';
 import {getTodos,insertTodo,deleteTodo,updateTodo} from '../../firebase/firebaseTodo'
 import {useSelector} from 'react-redux';
 import {Table,Button} from 'antd';
-import AddTodoModal from './AddTodoModal'
-import UpdateTodoModal from './UpdateTodoModal'
+import TodoModal from './TodoModal'
 export default function Todo() {
   const user = useSelector(state=>state.user.user);
   const [isModalVisible,setIsModalVisible] = useState(false);
@@ -84,7 +83,7 @@ export default function Todo() {
   <>
     <Table dataSource={todos} columns={columns} />
     <Button type="primary" onClick={addTodo} >Add Todo</Button>
-    <UpdateTodoModal handleFinishModal={handleFinishModal} isModalVisible={isModalVisible} closeModal={()=>setIsModalVisible(false)} todo={selectedTodo}/>
+    <TodoModal handleFinishModal={handleFinishModal} isModalVisible={isModalVisible} closeModal={()=>setIsModalVisible(false)} todo={selectedTodo}/>
   </>
   );
 }
